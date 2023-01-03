@@ -1,0 +1,22 @@
+.cart {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart button {
+  font-size: 24px;
+  width: 10rem;
+  height: 2rem;
+}
+
+.cart button:hover {
+  font-weight: 900;
+}

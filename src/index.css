@@ -124,3 +124,10 @@ a:hover {
   -webkit-text-fill-color: transparent;
   transition: 0.25s ease-out;
 }
+
+button {
+  background: linear-gradient(90.9deg, #08ccca, #18e79c);
+  border-radius: 4px;
+  border: none;
+  color: #fff;
+}

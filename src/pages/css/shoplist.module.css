@@ -4,6 +4,13 @@
   margin: 20px;
 }
 
+.shoplist .shopitem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .shoplist .cnt {
   display: flex;
   flex-direction: row;
