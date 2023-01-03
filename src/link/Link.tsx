@@ -15,7 +15,7 @@ const About = lazy(() =>
 
 export const RouteArr: [number, string, LazyExoticComponent<any>][] = [
   [1, '/', Home],
-  [2, '/cart', Cart],
-  [3, '/shoplist', ShopList],
+  [2, '/shoplist', ShopList],
+  [3, '/cart', Cart],
   [4, '/about', About],
 ];

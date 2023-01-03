@@ -1,0 +1,11 @@
+.shoplist {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 20px;
+}
+
+.shoplist .cnt {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

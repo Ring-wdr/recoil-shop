@@ -1,8 +1,22 @@
 .navbar {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  width: 100vw;
+  height: 70px;
+}
+
+.navbar .logoNroute {
+  display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.navbar img {
+  margin: 0px 15px 0px 5px;
 }
 
 .navbar .link {
-  margin: 5px;
+  margin: 15px;
 }

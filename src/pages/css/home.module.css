@@ -1,0 +1,28 @@
+.main {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: black;
+  text-align: center;
+}
+
+.greeting {
+  margin: 20px;
+}
+
+.greeting span {
+  font-weight: 900;
+  text-decoration: none;
+  background: linear-gradient(135deg, #0ed5bc, #14e0a9);
+  background-size: 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: 0.25s ease-out;
+}
+
+.albums {
+  display: flex;
+  justify-content: center;
+}
