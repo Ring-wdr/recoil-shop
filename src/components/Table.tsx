@@ -1,75 +1,94 @@
-import { useState } from 'react';
+import { useId, useMemo, useState } from 'react';
+import { ICartState } from '../recoil/cart';
+import styles from './css/table.module.css';
 
-const rows = [
-  { id: 1, name: 'Row 1', checked: true },
-  { id: 2, name: 'Row 2', checked: false },
-  { id: 3, name: 'Row 3', checked: false },
-];
+interface TableProps {
+  cart: ICartState[];
+  children?: JSX.Element;
+}
 
-type ObjType = {
-  [index: string]: boolean;
-};
-export const Table = () => {
+export const Table = ({ cart, children }: TableProps) => {
+  const headerID = useId();
   const [head, setHead] = useState(false);
-  const [eachChk, setEachChk] = useState<ObjType>(
-    Object.fromEntries(rows.map(({ id, checked }) => [id, checked]))
+  const [eachChk, setEachChk] = useState<Map<number, boolean>>(
+    new Map(cart.map(({ id, isChecked }) => [id, isChecked]))
+  );
+  const orderedHead = useMemo(
+    () => Object.keys(cart[0]).filter((key) => key !== 'isChecked'),
+    []
   );
 
-  const eachChangeCtl = (id: string) =>
-    setEachChk((prevChk) => {
-      const temp = prevChk?.val
-        ? { ...prevChk, [id]: true }
-        : { ...prevChk, [id]: !prevChk[id] };
-      Object.keys(temp).length === rows.length &&
-        Object.values(temp).every((value) => value === true) &&
-        setHead(true);
-      Object.keys(temp).length === rows.length &&
-        Object.values(temp).every((value) => value === false) &&
-        setHead(false);
+  const totalPrice = useMemo(
+    () =>
+      cart.reduce(
+        (sum: number, { id, price, cnt }) =>
+          eachChk.get(id) ? sum + price * cnt : sum,
+        0
+      ),
+    [cart, eachChk]
+  );
+
+  const eachChangeCtl = (id: number) =>
+    setEachChk((prevMap) => {
+      const temp = new Map([...prevMap, [id, !prevMap.get(id)]]);
+      const tempValues = [...temp.values()];
+      tempValues.every((value) => value === true) && setHead(true);
+      tempValues.every((value) => value === false) && setHead(false);
       return temp;
     });
 
   const allChangeCtl = (head: boolean) =>
-    setEachChk(() =>
-      head ? {} : Object.fromEntries(rows.map(({ id }) => [id, !head]))
-    );
+    setEachChk(() => new Map(cart.map(({ id }) => [id, !head])));
 
   return (
-    <table>
+    <table className={styles.table}>
       <thead>
         <tr>
           <th>
-            <input
-              type='checkbox'
-              checked={head}
-              onChange={() => {
-                allChangeCtl(head);
-                setHead((prev) => !prev);
-              }}
-            />
+            <>
+              <input
+                type='checkbox'
+                id={headerID}
+                checked={head}
+                onChange={() => {
+                  allChangeCtl(head);
+                  setHead((prev) => !prev);
+                }}
+              />
+              <label htmlFor={headerID} />
+            </>
           </th>
-          <th>ID</th>
-          <th>Name</th>
+          {orderedHead.map((key) => (
+            <th key={key}>{key}</th>
+          ))}
         </tr>
       </thead>
       <tbody>
-        {rows.map((row) => {
+        {cart.map((item) => {
+          const key = useId();
           return (
-            <tr key={row.id}>
+            <tr key={item.id}>
               <td>
                 <input
                   type='checkbox'
-                  checked={eachChk?.[String(row.id)] === true}
-                  onChange={() => {
-                    eachChangeCtl(String(row.id));
-                  }}
+                  id={key}
+                  checked={eachChk.get(item.id)}
+                  onChange={() => eachChangeCtl(item.id)}
                 />
+                <label htmlFor={key}></label>
               </td>
-              <td>{row.id}</td>
-              <td>{row.name}</td>
+              {orderedHead.map((head) => (
+                <td key={`${head}-${item.id}`}>
+                  {item[head as keyof ICartState]}
+                </td>
+              ))}
             </tr>
           );
         })}
+        <tr>
+          <td colSpan={4}>Total</td>
+          <td>{totalPrice}</td>
+        </tr>
       </tbody>
     </table>
   );

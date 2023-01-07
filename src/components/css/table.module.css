@@ -1,0 +1,38 @@
+.table {
+  text-align: center;
+  border-spacing: 0;
+  border-collapse: collapse;
+  vertical-align: middle;
+}
+
+.table label {
+  display: table-cell;
+}
+
+.table th {
+  width: 5rem;
+  border: 1px black solid;
+  border-collapse: collapse;
+}
+
+.table td {
+  width: 5rem;
+  border: 1px saddlebrown solid;
+  border-collapse: collapse;
+}
+
+.table input[type='checkbox'] {
+  display: none;
+}
+
+.table input[type='checkbox'] + label {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #bcbcbc;
+  cursor: pointer;
+}
+
+.table input[type='checkbox']:checked + label {
+  background: linear-gradient(90.9deg, #08ccca, #18e79c);
+}
