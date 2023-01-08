@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { cartState, ICartState } from '../recoil/cart';
+import { cartState } from '../recoil/cart';
 import styles from './css/cart.module.css';
 
 export const Cart = () => {
-  const [cart] = useRecoilState<ICartState[]>(cartState);
+  const [{ contents: cart }] = useRecoilState(cartState);
   const nav = useNavigate();
 
   const totalPrice = useMemo(
