@@ -10,8 +10,13 @@ interface TableProps {
 export const Table = ({ cart, children }: TableProps) => {
   const headerID = useId();
   const [head, setHead] = useState(false);
-  const [eachChk, setEachChk] = useState<Map<number, boolean>>(
-    new Map(cart.map(({ id, isChecked }) => [id, isChecked]))
+  const [eachChk, setEachChk] = useState<Set<number>>(
+    new Set(
+      cart.reduce(
+        (res: number[], { id, isChecked }) => (isChecked ? [...res, id] : res),
+        []
+      )
+    )
   );
   const orderedHead = useMemo(
     () => Object.keys(cart[0]).filter((key) => key !== 'isChecked'),
@@ -22,23 +27,24 @@ export const Table = ({ cart, children }: TableProps) => {
     () =>
       cart.reduce(
         (sum: number, { id, price, cnt }) =>
-          eachChk.get(id) ? sum + price * cnt : sum,
+          eachChk.has(id) ? sum + price * cnt : sum,
         0
       ),
     [cart, eachChk]
   );
 
   const eachChangeCtl = (id: number) =>
-    setEachChk((prevMap) => {
-      const temp = new Map([...prevMap, [id, !prevMap.get(id)]]);
-      const tempValues = [...temp.values()];
-      tempValues.every((value) => value === true) && setHead(true);
-      tempValues.every((value) => value === false) && setHead(false);
+    setEachChk((prevSet) => {
+      const temp = new Set<number>([...prevSet]);
+      temp.has(id) ? temp.delete(id) : temp.add(id);
+
+      temp.size === cart.length && setHead(true);
+      temp.size === 0 && setHead(false);
       return temp;
     });
 
   const allChangeCtl = (head: boolean) =>
-    setEachChk(() => new Map(cart.map(({ id }) => [id, !head])));
+    setEachChk(() => (head ? new Set() : new Set(cart.map(({ id }) => id))));
 
   return (
     <table className={styles.table}>
@@ -72,7 +78,7 @@ export const Table = ({ cart, children }: TableProps) => {
                 <input
                   type='checkbox'
                   id={key}
-                  checked={eachChk.get(item.id)}
+                  checked={eachChk.has(item.id)}
                   onChange={() => eachChangeCtl(item.id)}
                 />
                 <label htmlFor={key}></label>

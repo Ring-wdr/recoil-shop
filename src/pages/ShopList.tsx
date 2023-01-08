@@ -14,19 +14,17 @@ export const ShopList = () => {
    */
   const mutatePoca = (addedId: number, direction: boolean) => {
     setCart((oldCart) =>
-      oldCart.map(({ id, name, cnt, price }) =>
-        id !== addedId
-          ? {
-              id,
-              name,
-              cnt,
-              price,
-            }
+      oldCart.map((item) =>
+        item.id !== addedId
+          ? item
           : {
-              id,
-              name,
-              cnt: direction ? cnt + 1 : cnt !== 0 ? cnt - 1 : cnt,
-              price,
+              ...item,
+              cnt: direction
+                ? item.cnt + 1
+                : item.cnt !== 0
+                ? item.cnt - 1
+                : item.cnt,
+              isChecked: direction || item.cnt !== 1,
             }
       )
     );
