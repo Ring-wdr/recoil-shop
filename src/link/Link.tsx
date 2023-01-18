@@ -15,6 +15,9 @@ const About = lazy(() =>
 const TablePage = lazy(() =>
   import('../pages/TablePage').then((module) => ({ default: module.TablePage }))
 );
+const AGTable = lazy(() =>
+  import('../pages/AG-grid').then((module) => ({ default: module.AgGrid }))
+);
 
 export const RouteArr: [number, string, LazyExoticComponent<any>][] = [
   [1, '/', Home],
@@ -22,4 +25,5 @@ export const RouteArr: [number, string, LazyExoticComponent<any>][] = [
   [3, '/cart', Cart],
   [4, '/table', TablePage],
   [5, '/about', About],
+  [6, '/chart', AGTable],
 ];
