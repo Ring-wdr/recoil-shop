@@ -1,0 +1,19 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.center button {
+  height: 5rem;
+}
+
+.swiper {
+  width: 400px;
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+
+.swiper li {
+  display: inline-block;
+  object-fit: contain;
+}
