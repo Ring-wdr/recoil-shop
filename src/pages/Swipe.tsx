@@ -56,7 +56,7 @@ export const Swipe = () => {
         <button onClick={prevPage}>&lt;</button>
         <ul className={styles.swiper} ref={imgRef}>
           {imgSwipeArr.map((src) => (
-            <li>
+            <li key={src}>
               <img src={src} width="400" height="500" />
             </li>
           ))}

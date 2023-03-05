@@ -1,25 +1,22 @@
 import { lazy, LazyExoticComponent } from "react";
 
 const Home = lazy(() =>
-  import("../pages/Home").then((module) => ({ default: module.Home }))
+  import("../pages/Home").then(({ Home }) => ({ default: Home }))
 );
-// const Cart = lazy(() =>
-//   import('../pages/Cart').then((module) => ({ default: module.Cart }))
-// );
 const ShopList = lazy(() =>
-  import("../pages/ShopList").then((module) => ({ default: module.ShopList }))
+  import("../pages/ShopList").then(({ ShopList }) => ({ default: ShopList }))
 );
 const About = lazy(() =>
-  import("../pages/About").then((module) => ({ default: module.About }))
+  import("../pages/About").then(({ About }) => ({ default: About }))
 );
 const TablePage = lazy(() =>
-  import("../pages/TablePage").then((module) => ({ default: module.TablePage }))
+  import("../pages/TablePage").then(({ TablePage }) => ({ default: TablePage }))
 );
 const AGTable = lazy(() =>
-  import("../pages/AG-grid").then((module) => ({ default: module.AgGrid }))
+  import("../pages/AG-grid").then(({ AgGrid }) => ({ default: AgGrid }))
 );
 const Swipe = lazy(() =>
-  import("../pages/Swipe").then((module) => ({ default: module.Swipe }))
+  import("../pages/Swipe").then(({ Swipe }) => ({ default: Swipe }))
 );
 
 export const RouteArr: [number, string, LazyExoticComponent<any>][] = [
