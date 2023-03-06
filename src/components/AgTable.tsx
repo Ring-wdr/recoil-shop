@@ -1,18 +1,22 @@
-import { AgGridReact } from 'ag-grid-react';
-import { createContext, useCallback, useMemo, useState } from 'react';
+import { createContext, useCallback, useMemo, useState } from "react";
+import { AgGridReact, AgGridReactProps } from "ag-grid-react";
 import {
   AgTableContextAction,
   AgTableContextState,
   AgTableProps,
-} from 'types/AgTable';
-import { TableHeaderProps } from 'types/TableHeader';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-alpine.css';
+} from "types/AgTable";
+import { TableHeaderProps } from "types/TableHeader";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
 
 export const TblHeaderCxt = createContext<AgTableContextState>([]);
 export const TblActionCxt = createContext<AgTableContextAction | null>(null);
 
-export const AgTable = ({ rowData, children }: AgTableProps) => {
+export const AgTable = ({
+  rowData,
+  children,
+  ...props
+}: AgTableProps & AgGridReactProps) => {
   const [column, setColumn] = useState<TableHeaderProps[]>([]);
   const columnChange = useCallback((newHeader: TableHeaderProps) => {
     setColumn((headers) =>
@@ -42,11 +46,12 @@ export const AgTable = ({ rowData, children }: AgTableProps) => {
     <TblHeaderCxt.Provider value={column}>
       <TblActionCxt.Provider value={columnChange}>
         <AgGridReact
-          className='ag-theme-alpine'
+          className="ag-theme-alpine"
           rowData={rowData}
           columnDefs={columnDefs}
           defaultColDef={defaultColDef}
-          rowSelection='multiple'
+          rowSelection="multiple"
+          {...props}
         />
         {children}
       </TblActionCxt.Provider>
