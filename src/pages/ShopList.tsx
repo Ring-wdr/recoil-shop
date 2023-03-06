@@ -1,7 +1,7 @@
-import { useRecoilState } from 'recoil';
-import { shopListArr } from '../data/shopList';
-import { cartState } from '../recoil/cart';
-import styles from './css/shoplist.module.css';
+import { useRecoilState } from "recoil";
+import { shopListArr } from "../data/shopList";
+import { cartState } from "../recoil/cart";
+import styles from "./css/shoplist.module.css";
 
 export const ShopList = () => {
   const [{ contents: cart }, setCart] = useRecoilState(cartState);
@@ -12,9 +12,9 @@ export const ShopList = () => {
    * @param {boolean} direction - (true: 추가, false: 감소)
    */
   const mutatePoca = (addedId: number, direction: boolean) => {
-    setCart((oldCart) => ({
-      headers: oldCart.headers,
-      contents: oldCart.contents.map((item) =>
+    setCart(({ headers, contents }) => ({
+      headers,
+      contents: contents.map((item) =>
         item.id !== addedId
           ? item
           : {
@@ -36,9 +36,9 @@ export const ShopList = () => {
         ? shopListArr.map(([key, category, name, price, src]) => (
             <div key={key} className={styles.shopitem}>
               <img src={src} width={287} height={450} alt={name} />
-              <div className='name'>이름: {name}</div>
-              <div className='category'>카테고리: {category}</div>
-              <div className='price'>가격: {price}</div>
+              <div className="name">이름: {name}</div>
+              <div className="category">카테고리: {category}</div>
+              <div className="price">가격: {price}</div>
               <div className={styles.cnt}>
                 <button onClick={() => mutatePoca(key, true)}>+</button>
                 <div>{cart[key - 1]?.cnt}</div>

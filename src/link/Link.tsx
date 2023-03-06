@@ -12,11 +12,11 @@ const About = lazy(() =>
 const TablePage = lazy(() =>
   import("../pages/TablePage").then(({ TablePage }) => ({ default: TablePage }))
 );
-const AGTable = lazy(() =>
-  import("../pages/AG-grid").then(({ AgGrid }) => ({ default: AgGrid }))
-);
 const Swipe = lazy(() =>
   import("../pages/Swipe").then(({ Swipe }) => ({ default: Swipe }))
+);
+const Grape = lazy(() =>
+  import("../pages/Grape").then(({ Grape }) => ({ default: Grape }))
 );
 
 export const RouteArr: [number, string, LazyExoticComponent<any>][] = [
@@ -25,5 +25,5 @@ export const RouteArr: [number, string, LazyExoticComponent<any>][] = [
   [3, "/swipe", Swipe],
   [4, "/table", TablePage],
   [5, "/about", About],
-  [6, "/chart", AGTable],
+  [6, "/grape", Grape],
 ];

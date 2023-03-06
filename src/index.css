@@ -130,6 +130,10 @@ button {
   color: #fff;
 }
 
+button.toggle {
+  background: linear-gradient(90.9deg, #1b706f, #074f9d);
+}
+
 li {
   list-style: none;
 }

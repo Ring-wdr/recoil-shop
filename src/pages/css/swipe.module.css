@@ -1,3 +1,9 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .center {
   display: flex;
   justify-content: center;
@@ -16,4 +22,10 @@
 .swiper li {
   display: inline-block;
   object-fit: contain;
+}
+
+@media (pointer: coarse) {
+  .swiper {
+    width: 90vw;
+  }
 }

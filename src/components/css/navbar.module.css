@@ -17,6 +17,59 @@
   margin: 0px 15px 0px 5px;
 }
 
-.navbar .link {
+.links {
+  display: flex;
+  z-index: 5;
+}
+.link {
   margin: 15px;
+}
+.navbar .toggle {
+  display: none;
+}
+
+@media (max-width: 950px) {
+  .navbar img {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .navbar .links {
+    visibility: hidden;
+  }
+  .navbar .links.active {
+    visibility: initial;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-bottom: 2px solid bisque;
+  }
+
+  .links.active .link {
+    background: #ffffff;
+    /* width: 10rem; */
+    height: 2rem;
+    margin: 0;
+    transition: 0.5s;
+  }
+  .navbar .toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    font-size: 1.75rem;
+    width: 2rem;
+    height: 2rem;
+    top: 0.75rem;
+    right: 1rem;
+    text-align: center;
+  }
 }

@@ -51,7 +51,7 @@ export const Swipe = () => {
   }, []);
 
   return (
-    <div className={styles.center}>
+    <div className={styles.container}>
       <div className={styles.center}>
         <button onClick={prevPage}>&lt;</button>
         <ul className={styles.swiper} ref={imgRef}>

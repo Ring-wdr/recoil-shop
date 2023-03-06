@@ -7,10 +7,6 @@
   text-align: center;
 }
 
-.greeting {
-  margin: 20px;
-}
-
 .greeting span {
   font-weight: 900;
   text-decoration: none;
@@ -24,5 +20,22 @@
 
 .albums {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 0.5rem;
+}
+
+.table {
+  height: 200px;
+  width: 900px;
+  margin-top: 1rem;
+}
+
+@media (pointer: coarse) {
+  .albums img {
+    width: 90vw;
+  }
+  .table {
+    width: 90vw;
+  }
 }
