@@ -7,6 +7,7 @@ const buttonArr = Array.from({ length: 9 }, (_, idx) => idx);
 export const Grape = () => {
   const [adult, setAdult] = useState(0);
   const [youth, setYouth] = useState(0);
+  const [isHandi, setHandi] = useState(false);
   const [remain, setRemain] = useState(
     Array<[number, boolean][]>(3).fill(
       Array.from({ length: 13 }, (_, idx) => [idx + 1, false])
@@ -52,8 +53,22 @@ export const Grape = () => {
 
   return (
     <div className={global.container}>
+      인원 선택
       <table className={styles.many}>
         <tbody>
+          <tr>
+            <th>장애인: </th>
+            <td>
+              <input
+                type="checkbox"
+                checked={isHandi}
+                onChange={() => setHandi((handi) => !handi)}
+                disabled
+              />
+            </td>
+            <th>잔여좌석</th>
+            <td>{39 - occupiedCnt}/39</td>
+          </tr>
           <tr>
             <th>어른</th>
             <td>
@@ -68,8 +83,8 @@ export const Grape = () => {
                 </button>
               ))}
             </td>
-            <th>잔여좌석</th>
-            <td>{39 - occupiedCnt}/39</td>
+            <th rowSpan={2}>총 금액:</th>
+            <td rowSpan={2}>{calculatedAmount}원</td>
           </tr>
           <tr>
             <th>
@@ -89,8 +104,6 @@ export const Grape = () => {
                 </button>
               ))}
             </td>
-            <th>총 금액:</th>
-            <td>{calculatedAmount}원</td>
           </tr>
         </tbody>
       </table>
