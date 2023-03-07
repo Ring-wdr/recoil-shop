@@ -53,7 +53,7 @@ export const Grape = () => {
 
   return (
     <div className={global.container}>
-      인원 선택
+      인원 선택(commitTest)
       <table className={styles.many}>
         <tbody>
           <tr>
