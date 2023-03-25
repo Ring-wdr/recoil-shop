@@ -18,6 +18,9 @@ const Swipe = lazy(() =>
 const Grape = lazy(() =>
   import("../pages/Grape").then(({ Grape }) => ({ default: Grape }))
 );
+const Drag = lazy(() =>
+  import("../pages/Drag").then(({ Drag }) => ({ default: Drag }))
+);
 
 export const RouteArr: [number, string, LazyExoticComponent<any>][] = [
   [1, "/", Home],
@@ -26,4 +29,5 @@ export const RouteArr: [number, string, LazyExoticComponent<any>][] = [
   [4, "/table", TablePage],
   [5, "/about", About],
   [6, "/grape", Grape],
+  [7, "/drag", Drag],
 ];

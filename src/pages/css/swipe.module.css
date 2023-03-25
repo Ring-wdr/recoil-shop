@@ -17,11 +17,20 @@
   width: 400px;
   white-space: nowrap;
   overflow-x: hidden;
+  transition: opacity 1s ease;
 }
 
 .swiper li {
   display: inline-block;
   object-fit: contain;
+}
+
+.swiper li.active {
+  opacity: 1;
+}
+
+.swiper li.inactive {
+  opacity: 0;
 }
 
 @media (pointer: coarse) {

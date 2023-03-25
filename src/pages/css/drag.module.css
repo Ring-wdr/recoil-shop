@@ -1,0 +1,15 @@
+.contents {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 1rem;
+}
+
+.input-todo {
+  margin-left: 2rem;
+  display: flex;
+  gap: 0.5rem;
+}

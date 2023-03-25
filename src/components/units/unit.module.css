@@ -1,0 +1,24 @@
+.unit {
+  background: radial-gradient(
+    circle at 100%,
+    #333,
+    #333 50%,
+    #eee 75%,
+    #333 75%
+  );
+  color: white;
+  margin: 0.5rem;
+  min-height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 0 0 0.5rem;
+  text-align: center;
+  cursor: move;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.unit.completed {
+  text-decoration: line-through;
+}
