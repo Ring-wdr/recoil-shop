@@ -1,10 +1,10 @@
 .unit {
   background: radial-gradient(
     circle at 100%,
-    #333,
-    #333 50%,
-    #eee 75%,
-    #333 75%
+    #9ef0d2,
+    #eee 50%,
+    #15b67b 75%,
+    #9ef0d2 75%
   );
   color: white;
   margin: 0.5rem;
@@ -20,5 +20,22 @@
 }
 
 .unit.completed {
+  background: radial-gradient(
+    circle at 100%,
+    #111,
+    #333 50%,
+    #595959 75%,
+    #333 75%
+  );
   text-decoration: line-through;
+}
+
+.unit.floating {
+  background: radial-gradient(
+    circle at 100%,
+    #333,
+    #24198b 50%,
+    #9ef0d2 75%,
+    #28559e 75%
+  );
 }

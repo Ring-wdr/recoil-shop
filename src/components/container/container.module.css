@@ -2,4 +2,5 @@
   background: rgba(0, 0, 0, 0.9);
   width: 10rem;
   height: 30rem;
+  transition: 0.2s;
 }

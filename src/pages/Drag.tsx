@@ -5,13 +5,14 @@ import styles from "./css/drag.module.css";
 import { FileUploadModal } from "@/components/fileUpload";
 import { FileModalHandleProps } from "@/components/fileUpload/FileUpload";
 
+// show me css code that floating drag image only moves in parent element
+
 interface TodoType {
   id: number;
   text: string;
   completed: boolean;
+  floating?: boolean;
 }
-
-// drag and drop 할 때 drop 위치에 drag 요소를 미리 표시하는 코드를 만들어줘
 
 const initTodos: TodoType[] = [
   // { id: 1, text: "Do laundry", completed: false },
@@ -61,40 +62,24 @@ export const Drag = () => {
     if (draggedTodo.id === droppedTodo.id) return;
 
     setTodos((prevTodos) =>
-      prevTodos.reduce(
-        (result: TodoType[], todoRow) =>
-          todoRow.id === droppedTodo.id
-            ? [...result, todoRow, { ...draggedTodo, id: 100_000_000 }]
-            : todoRow.id === 100_000_000
-            ? result
-            : [...result, todoRow],
-        []
+      prevTodos.map((todo) =>
+        todo.id === draggedTodo.id
+          ? { ...droppedTodo, floating: undefined }
+          : todo.id === droppedTodo.id
+          ? { ...draggedTodo, floating: true }
+          : todo
       )
     );
   };
-
-  const handleDragLeave = () => {
+  const handleDragEnd = () => {
     if (draggedTodo) {
-      setTodos((prevTodos) => prevTodos.filter(({ id }) => id !== 100_000_000));
+      setTodos((prevTodos) =>
+        prevTodos.map((todo) =>
+          todo.floating ? { ...todo, floating: false } : todo
+        )
+      );
+      setDraggedTodo(null);
     }
-  };
-
-  const handleDrop = (droppedTodo: TodoType) => {
-    if (!draggedTodo) return;
-    if (draggedTodo.id === droppedTodo.id) return;
-
-    setTodos((prevTodos) =>
-      prevTodos.reduce(
-        (result: TodoType[], todo) =>
-          todo.id === draggedTodo.id
-            ? result
-            : todo.id === 100_000_000
-            ? [...result, draggedTodo]
-            : [...result, todo],
-        []
-      )
-    );
-    setDraggedTodo(null);
   };
 
   const handleToggleComplete = (Clickedtodo: TodoType) =>
@@ -125,12 +110,12 @@ export const Drag = () => {
               onDragStart={() => handleDragStart(todo)}
               onDragOver={defaultPreventer}
               onDragEnter={() => handleDragEnter(todo)}
-              onDragLeave={handleDragLeave}
-              onDrop={() => handleDrop(todo)}
+              onDragEnd={handleDragEnd}
               onClick={() => handleToggleComplete(todo)}
               onDelete={() => delTodo(todo.id)}
               completed={todo.completed}
               label={todo.text}
+              isFloating={todo.floating}
             />
           ))}
         </Container>
