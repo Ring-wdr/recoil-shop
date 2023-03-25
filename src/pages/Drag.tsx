@@ -11,6 +11,8 @@ interface TodoType {
   completed: boolean;
 }
 
+// drag and drop 할 때 drop 위치에 drag 요소를 미리 표시하는 코드를 만들어줘
+
 const initTodos: TodoType[] = [
   // { id: 1, text: "Do laundry", completed: false },
   // { id: 2, text: "Buy groceries", completed: false },
@@ -54,22 +56,45 @@ export const Drag = () => {
   /** todo 위치 변경 */
   const handleDragStart = (todo: TodoType) => setDraggedTodo(todo);
 
-  const handleDrop = (droppedTodo: TodoType) => {
-    if (draggedTodo) {
-      const draggedTodoIndex = todos.indexOf(draggedTodo);
-      const droppedTodoIndex = todos.indexOf(droppedTodo);
+  const handleDragEnter = (droppedTodo: TodoType) => {
+    if (!draggedTodo) return;
+    if (draggedTodo.id === droppedTodo.id) return;
 
-      setTodos((prevTodos) =>
-        prevTodos.map((todo, idx) =>
-          idx === draggedTodoIndex
-            ? droppedTodo
-            : idx === droppedTodoIndex
-            ? draggedTodo
-            : todo
-        )
-      );
-      setDraggedTodo(null);
+    setTodos((prevTodos) =>
+      prevTodos.reduce(
+        (result: TodoType[], todoRow) =>
+          todoRow.id === droppedTodo.id
+            ? [...result, todoRow, { ...draggedTodo, id: 100_000_000 }]
+            : todoRow.id === 100_000_000
+            ? result
+            : [...result, todoRow],
+        []
+      )
+    );
+  };
+
+  const handleDragLeave = () => {
+    if (draggedTodo) {
+      setTodos((prevTodos) => prevTodos.filter(({ id }) => id !== 100_000_000));
     }
+  };
+
+  const handleDrop = (droppedTodo: TodoType) => {
+    if (!draggedTodo) return;
+    if (draggedTodo.id === droppedTodo.id) return;
+
+    setTodos((prevTodos) =>
+      prevTodos.reduce(
+        (result: TodoType[], todo) =>
+          todo.id === draggedTodo.id
+            ? result
+            : todo.id === 100_000_000
+            ? [...result, draggedTodo]
+            : [...result, todo],
+        []
+      )
+    );
+    setDraggedTodo(null);
   };
 
   const handleToggleComplete = (Clickedtodo: TodoType) =>
@@ -99,7 +124,8 @@ export const Drag = () => {
               key={todo.id}
               onDragStart={() => handleDragStart(todo)}
               onDragOver={defaultPreventer}
-              onDragEnter={defaultPreventer}
+              onDragEnter={() => handleDragEnter(todo)}
+              onDragLeave={handleDragLeave}
               onDrop={() => handleDrop(todo)}
               onClick={() => handleToggleComplete(todo)}
               onDelete={() => delTodo(todo.id)}
