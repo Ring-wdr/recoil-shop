@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { CachedImage } from "@/components/cachedImage";
 import { AgTable } from "@/components/AgTable";
 import { AgTableHeader } from "@/components/AgTableHeader";
 import styles from "./css/home.module.css";
@@ -78,14 +79,14 @@ export const Home = () => {
         </div>
       </div>
       <div className={styles.albums}>
-        <img
-          src="https://sourcemusic.com/resources/discography/cfae49df-6597-465f-b21f-7b7597560ed1.png"
+        <CachedImage
+          src="/resources/discography/cfae49df-6597-465f-b21f-7b7597560ed1.png"
           alt="(KOR) Alt Tag"
-        ></img>
-        <img
-          src="https://sourcemusic.com/resources/discography/c82a4114-7be3-44cd-bb3f-fcec274c018c.png"
-          alt="(KOR) Alt Tag"
-        ></img>
+        />
+        <CachedImage
+          src="/resources/discography/c82a4114-7be3-44cd-bb3f-fcec274c018c.png"
+          alt="(KOR) Alt Tag2"
+        />
       </div>
     </div>
   );

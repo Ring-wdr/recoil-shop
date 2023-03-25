@@ -1,3 +1,4 @@
+import { CachedImage } from "@/components/cachedImage";
 import { useRecoilState } from "recoil";
 import { shopListArr } from "../data/shopList";
 import { cartState } from "../recoil/cart";
@@ -35,7 +36,7 @@ export const ShopList = () => {
       {shopListArr.length > 0
         ? shopListArr.map(([key, category, name, price, src]) => (
             <div key={key} className={styles.shopitem}>
-              <img src={src} width={287} height={450} alt={name} />
+              <CachedImage src={src} width={287} height={450} alt={name} />
               <div className="name">이름: {name}</div>
               <div className="category">카테고리: {category}</div>
               <div className="price">가격: {price}</div>
