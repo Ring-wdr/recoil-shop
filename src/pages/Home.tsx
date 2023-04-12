@@ -87,6 +87,12 @@ export const Home = () => {
           src="/resources/discography/c82a4114-7be3-44cd-bb3f-fcec274c018c.png"
           alt="(KOR) Alt Tag2"
         />
+        <CachedImage
+          src="/resources/discography/d17fdf95-32c2-446d-8e46-1ce193e6bea6.jpg"
+          alt="(KOR) Alt Tag3"
+          height={570}
+          width={570}
+        />
       </div>
     </div>
   );
